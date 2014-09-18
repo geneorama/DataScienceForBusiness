@@ -9,3 +9,10 @@
 
 # RStudio files
 .Rproj.user/
+
+# Markdown
+.md
+.Rproj.user
+
+## Annoying Windows file
+Thumbs.db
