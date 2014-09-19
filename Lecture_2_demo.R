@@ -33,9 +33,7 @@ if(!file.exists('data')) dir.create('data')
 
 if(!file.exists(localfile)) download.file(url, localfile)
 
-fp <- 'C:/Users/375492/Downloads/Cook_County_Check_Register.csv'
-
-dat <- data.table(read.table(file=fp,
+dat <- data.table(read.table(file=localfile,
 							 header = TRUE, 
 							 sep = ",", 
 							 comment = "", 
