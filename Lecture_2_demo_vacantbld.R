@@ -135,13 +135,13 @@ confusionMatrix(reference=rpm$y,
 ##------------------------------------------------------------------------------
 ## SIMPLE GLM MODEL
 ##------------------------------------------------------------------------------
-# system.time(
-# 	LogisticReg <- train(x = xmat_filtered2[Partitions[[1]], ],
-# 						 y = as.factor(ymat[Partitions[[1]], ]),
-# 						 method = "glm",
-# 						 trControl = trainControl(method="repeatedcv",
-# 						 						 repeats = 5))
-# )
+system.time(
+	LogisticReg <- train(x = xmat_filtered2[Partitions[[1]], ],
+						 y = as.factor(ymat[Partitions[[1]], ]),
+						 method = "glm",
+						 trControl = trainControl(method="repeatedcv",
+						 						 repeats = 5))
+)
 # saveRDS(LogisticReg, "data/20140507/VacantBuildings_predict_20_LogisticReg.Rds")
 # LogisticReg <- readRDS("data/20140507/VacantBuildings_predict_20_LogisticReg.Rds")
 
