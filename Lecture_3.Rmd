@@ -1,0 +1,244 @@
+
+
+## Data Science for Business
+
+Lecture 3 notes
+
+Gene Leynes
+
+License: GPL v3
+
+## Typical initialization
+
+```{r}
+##------------------------------------------------------------------------------
+## INITIALIZE
+##------------------------------------------------------------------------------
+
+## Remove all objects; perform garbage collection
+rm(list=ls())
+gc(reset=TRUE)
+
+## Check for dependencies
+if(!"geneorama" %in% rownames(installed.packages())){
+	if(!"devtools" %in% rownames(installed.packages())){
+		install.packages('devtools')
+		}
+	devtools::install_github('geneorama/geneorama')
+	}
+
+## Load libraries
+geneorama::detach_nonstandard_packages()
+# geneorama::loadinstall_libraries(c("geneorama", "knitr", "caret", "gbm", 
+# 								   "glmnet", "ROCR", "pROC", "plyr", "class", 
+# 								   "hmeasure", "randomForest", 
+# 								   "AppliedPredictiveModeling", "data.table", 
+# 								   "doParallel", "e1071", "rpart"))
+geneorama::loadinstall_libraries(c("geneorama", "knitr", "data.table", "ggplot2"))
+
+
+opts_chunk$set(tidy=FALSE, fig.width=12)
+```
+
+Code that shows how the original data was copied from Excel...
+
+Not the most reproducable way to do things.  Normally you should update live from a website or database, but the wikipedia tables required manual edits (and it's just an example).
+
+
+```{r}
+## First time... Copy the data from excel and create an RDS file
+# coindat <- clipped()
+# coindat
+# coindat$number <- NULL
+# saveRDS(coindat, "data/Presidential_coins_wikipedia.Rds")
+
+
+# presdat <- clipped()
+# presdat$tookofficetext <- NULL
+# presdat$leftofficetext <- NULL
+# presdat <- sapply(presdat, function(x)gsub("\\[.+\\]", "", x))
+# presdat <- as.data.table(presdat)
+# str(presdat)
+# presdat[,no:=as.integer(no)]
+# presdat[,tookoffice:=as.IDate(tookoffice, "%B %d, %Y")]
+# presdat[,leftoffice:=as.IDate(leftoffice, "%B %d, %Y")]
+# setnames(presdat, "no", "number")
+# saveRDS(presdat, "data/Presidential_office_data.Rds")
+
+```
+
+
+## Read in the saved data and fix it up
+
+```{r}
+rm(list=ls())
+ls()
+
+coindat <- readRDS("data/Presidential_coins_wikipedia.Rds")
+presdat <- readRDS("data/Presidential_office_data.Rds")
+ls()
+
+str(coindat)
+str(presdat)
+
+coindat <- as.data.table(coindat)
+coindat[,total := denver + philadelphia]
+
+## Convert release date to iDate
+coindat[,releasedate:=as.IDate(releasedate,  "%B %d, %Y")]
+```
+
+## Take a look at the coin data
+```{r}
+str(dat)
+
+plot(total~releasedate, coindat[,list(total=total/1000, releasedate)], type="o", 
+	 main = paste("US President Mintage Output", "in 000's", sep="\n"))
+addbg()
+
+text(total/1000 ~ releasedate, labels = president, data = coindat)
+# text(x = coindat$releasedate, y = coindat$total/1000, labels = coindat$president)
+```
+
+
+```{r}
+## Can we merge on president?
+inin(coindat$president, presdat$president)
+## Looks like it... but there's a problem: Grover Cleveland is a duplicate
+# merge(coindat, presdat, by = "president")
+
+## We can merge on "Number", if we change "release" to "number"
+setnames(coindat, "release", "number")
+
+## Merge
+## This isn't a perfect merge... (makes two copies of "president")
+# merge(coindat, presdat, by = "number")
+
+## This merge works:
+dat <- merge(x = coindat, 
+			 y = presdat[,list(number,tookoffice, leftoffice, party = as.factor(party))], 
+			 by = "number")
+str(dat)
+```
+
+## Motivating example for data table
+
+Let's say we want to calculate how long each president was in office
+
+```{r}
+
+## How should we calculate the time difference?
+dat[, leftoffice - tookoffice]
+dat[, (leftoffice - tookoffice) / 365]
+dat[, round((leftoffice - tookoffice) / 365, 2)]
+dat[, as.numeric(round((leftoffice - tookoffice) / 365, 2))]
+
+## Better yet... we could do it right in the merge and eliminate the need
+## for all these steps (now that we have it figured out)
+dat <- merge(x = coindat, 
+			 y = presdat[i = number %in% 1:32, ## Maybe we're unsure of the join mechanics
+			 			 j = list(number,
+			 			 		  tookoffice, 
+			 			 		  leftoffice, 
+			 			 		  party = as.factor(party),
+			 			 		  yrs_in_office = as.numeric(round((leftoffice - tookoffice) / 
+			 			 		  					  	365.25, 2)))], 
+			 by = "number")
+dat
+
+```
+
+# GGPLOT2
+
+## Simple example
+
+```{r}
+ggplot(dat) + aes(x = releasedate, y = total) + geom_point()
+```
+
+## adding a line
+
+```{r}
+p <- ggplot(dat) + aes(x = releasedate, y = total) + geom_point()
+p
+p + geom_line()
+```
+
+### Generally speaking, don't make ggplot2 objects
+It's good to know about, but usually causes more trouble than it's worth.
+```{r}
+rm(p)
+```
+
+
+## Closer to Deluxe
+
+```{r}
+ggplot(dat) + aes(x = releasedate, y = total, color = party) + 
+	geom_line(size = 2) +
+	geom_point(aes(size = yrs_in_office), color = "black")  
+```
+
+```{r}
+ggplot(dat) + aes(x = releasedate, y = total) + 
+	geom_line(size = 1) +
+	geom_point(aes(size = yrs_in_office, color = party))  
+```
+
+```{r}
+mycolors <- c('blue','purple','darkgreen','black','red','white','pink')
+
+ggplot(dat) + aes(x = releasedate, y = total/1000) + 
+	geom_line(size = 1) +
+	geom_point(aes(size = yrs_in_office, color = party)) +
+    xlab("Release Date") +
+    ylab("Mintage (in thousands)") +
+    theme(plot.title = element_text(size = 20)) +
+    labs(title='President Coin Volume by date \n (note the newline --->)\n') +
+    scale_colour_manual(values = mycolors) +
+	expand_limits(y=-5e4) +
+    theme(panel.background = element_rect(fill = "gray60", colour = "black")) +
+    theme(panel.grid.major = element_line(colour = "gray40")) +
+    theme(panel.grid.minor = element_line(colour = "gray70", linetype = "dotted")) + 
+	geom_hline(h=0, size=2)
+```
+
+```{r}
+mycolors <- c('blue','purple','darkgreen','black','red','orange','maroon')
+
+ggplot(dat) + aes(x = tookoffice, y = total/1000) + 
+	geom_line(size = 1) +
+	geom_point(aes(size = yrs_in_office, color = party)) +
+    xlab("Date in office") +
+    ylab("Mintage (in thousands)") +
+    theme(plot.title = element_text(size = 20)) +
+    labs(title='President Coin Volume by \n date they were in office\n') +
+    scale_colour_manual(values = mycolors) 
+```
+
+
+## Quick intro into reshaping
+
+```{r}
+library(reshape2)
+
+dat_by_mint <- melt(dat,
+					id.vars=c("president", "releasedate"),
+					measure.vars = c("denver", "philadelphia"))
+dat_by_mint <- as.data.table(dat_by_mint)
+setnames(dat_by_mint, "variable", "mint")
+setnames(dat_by_mint, "value", "volume")
+dat_by_mint
+
+
+ggplot(dat_by_mint) + aes(x = releasedate, y = volume/1000, color=mint) + 
+	geom_line(size = 2) +
+	geom_point(aes(size = 2, color = mint)) +
+    ylab("Mintage (in thousands)") +
+    theme(plot.title = element_text(size = 20)) +
+    labs(title='President Coin Volume by mint\n')
+```
+
+
+
+
