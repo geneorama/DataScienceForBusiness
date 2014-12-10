@@ -33,6 +33,8 @@ I'm putting both versions of the mother of all R cheatsheets.
 
 ### Learning R references
 
+These are two of my favorite quick references for learning R topics and finding examples.
+
 * http://www.cookbook-r.com/
 * http://www.r-statistics.com/
 
@@ -40,6 +42,14 @@ Also R's built in documentation is incredibly valuable, but it's also dense for 
 
 * http://cran.r-project.org/faqs.html
 * http://cran.r-project.org/manuals.html
+
+### Getting out of R
+
+Once you've done analysis in R, you need to get it out of R.  Here's how
+
+Use Knitr to make reports [knitr tutorial](http://kbroman.org/knitr_knutshell/)
+Use Shiny to make interactive reports (i.e. applications) [Shiny tutorial](http://shiny.rstudio.com/tutorial/)
+
 
 ### Using R the "Gene" way
 
