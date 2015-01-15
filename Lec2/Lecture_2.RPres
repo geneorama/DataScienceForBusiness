@@ -1,5 +1,5 @@
 
-DATA SCIENCE FOR BUSINESS PRGM - 2014-2015 Autumn
+DATA SCIENCE FOR BUSINESS - Lecture 2
 ================================================================================
 width: 1920
 height: 1080
@@ -9,118 +9,61 @@ opts_chunk$set(fig.align='center', fig.width=18, fig.height=10)
 ```
 Author: Gene Leynes
 
-Date: September 18, 2014
+Date: January 15, 2015
 
 
-
-How to learn R
+About me:
 ================================================================================
+Education
+ - University of Chicago MBA
+ - DePaul University Math / Statistics
+Experience
+ - Milliman consultant – more than 100 projects over 6 years in a variety of industries, client types, and project sizes
+ - Entrepreneur – Developed fully automated, real time trading systems for hedge funds / broker dealers
+ - Milliman consultant (part 2) – Product development / data mining for large scale multinational projects
+ - Founder of Chicago Data Science (Entrepreneur part 2)
+   + Large scale server performance analysis, sensor analysis, microcontrollers, hedge fund work
+   + Help other start-up companies at 1871 
+ - Data Scientist at the City of Chicago (May 2014)
+   + SmartData Platform project; Bloomberg funded
 
-"There are many like it, but this one is mine."  - from the Rifleman's Creed, Major General William H. Rupertus 
-
-There is a truly vast and ever growing growing body of literature dedicated to helping people learn R, however not all of the information is created equally. 
-
- - CRAN is always the maintainer of the R application and the default source of information: http://cran.r-project.org/
- - Currently, R Studio is the best choice for code editing and project mangement http://www.rstudio.com/
- - R has hundreds of user contributed libraries that you can install within R.
+Today's class
+================================================================================
+ - Doing data science
+  - The data science workflow
+  - Why R
+  - How to learn R (lots of handouts)
+  
+ - Doing data science, the real details that nobody tells you
+  - Text editing 
+  - IDE (R Studio)
+  - File comparison
+  - Style guides
+  
+ - Version control
  
-CRAN Specific resources:
- - The R FAQs are invaluable: http://cran.r-project.org/faqs.html
- - The statndard documentation is also invaluable: http://cran.r-project.org/manuals.html
- - There are several "task views" that are very helpful for learning about R resources associated with particular tasks.
- - You can access help right from R with "?".  For example, you can learn about the `lm` funciton by typing `?lm` at the console.
- - CRAN resources and help can be very hard to understand, this is normal.  Use many approaches to solve problems. 
- - Download and print this cheat sheet: http://cran.r-project.org/doc/contrib/Short-refcard.pdf
- - See also http://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf (this one is new to me)
+ - Analysis in R
 
 
-Where to get help
+
+The Data Science Workflow
+================================================================================
+
+![process.png](images_lec2/PROCESS.PNG)
+
+
+Typical Project's folder structure
 ================================================================================
 
 <br>
- - Pay attention to _when_ something was written, and to _who_ wrote it. Some people seem to write guides as a way of learning themselves...
- - Early R contributors really understand the internals, but their writings can be hard to understand.
- - Newer R contributors tend to approach things from the perspective of their particular angle / set of packages 
- - Stack Overflow is a great place to find questions and answers if you get stuck. http://stackoverflow.com/questions/tagged/R
- - I highly recommend Stack Overflow over the r-help mailing list. 
- - Many pacakges have vignettes which can be extremely helpful.
+## Project structure
+![TypicalProject](images_lec2/TypicalProject.png)  
 
-------------------------
-Stackoverflow posting guide:
-------------------------
-![SO Posting guide](images_lec2/tech_support_cheat_sheet.png)<br>
-source: http://www.xkcd.com/627/
-
-Standing on the shoulders of giants
-================================================================================
-<br>
-### Best Guides:
-My favorite R resources for quick help:
- - http://www.cookbook-r.com/
- - http://www.r-statistics.com/
-
-If you have experienced a singularity and have near infinite time to think:
- - http://www.r-bloggers.com/
- - http://cran.r-project.org/doc/contrib/
- - http://cran.r-project.org/doc/contrib/usingR.pdf
- - http://cran.r-project.org/web/views/
-
--------------
-<br>
-### Best packages:
- - `data.table` The data frame evolved.
-  - http://cran.r-project.org/web/packages/data.table/vignettes/datatable-faq.pdf
- - `ggplot2` Hadley's Grammar of graphics
- 	- http://ggplot2.org/
- 	- http://www.cookbook-r.com/Graphs/
- - `caret` Max Kuhn's machine learning pacakge
-    - http://topepo.github.io/caret/index.html 
- 	- http://www.amazon.com/Applied-Predictive-Modeling-Max-Kuhn/dp/1461468485
- - `knitr` Yihui Xie's report writing tool based on markdown
- 	- http://yihui.name/knitr/
- 	- http://rmarkdown.rstudio.com/
- - `shiny` R Studio's jQuery powered application maker
- 	- http://shiny.rstudio.com/
-
-
-Big picture of R
-================================================================================
+**********
 
 <br>
-**Things to install**
- - R http://cran.r-project.org/
- - RStudio  http://www.rstudio.com/products/rstudio/download/
- - git http://git-scm.com/downloads
-
-**Things in R**
- - Elements
- - Vectors
- - Matricies
- - Data frames
- - Lists
- - Environments
- - Functions
-
--------------
-<br>
-**Things in R that do things (mostly within R)**
- - Scripts
- - Projects
- - Packages on CRAN (install.packages)
- - Packages elsewhere (devtools)
-
-**There are different ways to use R**
- - Step through code
- - Run a script at the command line
- - Put things into functions (more like making software)
-
-**Technical details**
- - The PATH environmental variable
- - Environmental variables
- - You don't need admin rights to have a good time
- - R was not written by pirates
- - R was not written programmers either
-
+## Data Structure
+![TypicalProject](images_lec2/TypicalProjectData.png)
 
 
 Start of a typical script
@@ -161,98 +104,109 @@ VIOLATION_ORDINANCE_DM <- readRDS(filepath3)
 
 ```
 
-Typical Project's folder structure (more about this later)
+CRAN Task Views (http://cran.r-project.org/web/views/)
+================================================================================
+
+Main View:
+------------------------
+![taskviews](images_lec2/cran_taskviews.png)
+***
+Individual Task view
+------------------------
+![taskviews](images_lec2/cran_taskviews_finance.PNG)
+
+
+How to learn R
+================================================================================
+
+"There are many like it, but this one is mine."  - from the Rifleman's Creed, Major General William H. Rupertus 
+
+There are many great guides, blog posts, and ways to learn R.  Some of the best are brand new, but not all of the information is created equally. 
+
+ - CRAN is always the maintainer of the R application and the default source of information: http://cran.r-project.org/
+ - R Studio is the best choice for code editing and project mangement http://www.rstudio.com/
+ - R Studio also has lots of related "learning R" resources
+ 
+CRAN Specific resources:
+ - The R FAQs are invaluable: http://cran.r-project.org/faqs.html
+ - The statndard documentation is also invaluable: http://cran.r-project.org/manuals.html
+ - You can access help right from R with "?".  For example, you can learn about the `lm` funciton by typing `?lm` at the console.
+ - CRAN resources and help can be very hard to understand, this is normal.  Remember to use many approaches to solve problems.
+ - Download and print this cheat sheet: http://cran.r-project.org/doc/contrib/Short-refcard.pdf
+ - See also http://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf (this one is new to me)
+
+Best Guides and References
+================================================================================
+<br>
+### Best Guides:
+My favorite R resources for quick help:
+ - http://www.cookbook-r.com/
+ - http://www.r-statistics.com/
+
+If you have experienced a singularity and have near infinite time to think:
+ - http://www.r-bloggers.com/
+ - http://cran.r-project.org/doc/contrib/
+ - http://cran.r-project.org/doc/contrib/usingR.pdf
+ - http://cran.r-project.org/web/views/
+
+-------------
+<br>
+### Best packages:
+ - `data.table` The data frame evolved.
+    - http://cran.r-project.org/web/packages/data.table/vignettes/datatable-faq.pdf
+ - `ggplot2` Hadley's Grammar of graphics
+ 	- http://ggplot2.org/
+ 	- http://www.cookbook-r.com/Graphs/
+ - `caret` Max Kuhn's machine learning pacakge
+    - http://topepo.github.io/caret/index.html 
+ 	- http://www.amazon.com/Applied-Predictive-Modeling-Max-Kuhn/dp/1461468485
+ - `knitr` Yihui Xie's report writing tool based on markdown
+ 	- http://yihui.name/knitr/
+ 	- http://rmarkdown.rstudio.com/
+ - `shiny` R Studio's jQuery powered application maker
+ 	- http://shiny.rstudio.com/
+
+
+Stackoverflow (enjoy googling stuff? Then be a data scientist)
+================================================================================
+![Stackoverflow](images_lec2/Stackoverflow_annotated.PNG)
+
+
+Where to get help
 ================================================================================
 
 <br>
-## Project structure
-![TypicalProject](images_lec1/TypicalProject.png)  
+Pay attention to _when_ something was written, and to _who_ wrote it. Some people seem to write guides as a way of learning themselves...
+ - http://stackoverflow.com/questions/tagged/R
+ - Look for package vignettes
 
-**********
+------------------------
+Stackoverflow posting guide:
+------------------------
+![SO Posting guide](images_lec2/tech_support_cheat_sheet.png)<br>
+source: http://www.xkcd.com/627/
 
-<br>
-## Data Structure
-![TypicalProject](images_lec1/TypicalProjectData.png)
 
+
+
+IDE vs Text Editor vs Command Line
+================================================================================
+There are different ways to use R, but you're going to want a good text editor to look at code, settings, and anything that's not compiled.
+
+![texteditor](images_lec2/texteditor.PNG)
+
+IDE vs Text Editor vs Command Line
 
 
 
 ================================================================================
-# Small Example
-
-Topics: Assignment, variables, functions, random number generation,
-        factors, comments, vectors
-
-```{r}
-rm(list=ls())
-
-## Boxplot Example with gl
-g <- factor(round(10 * runif(10*100)))
-x <- rnorm(10*100) + sqrt(as.numeric(g))
-
-boxplot(x~g, col='lavender', notch=T, var.width=T,
-		main = "something random")
-```
 
 
-================================================================================
-# `ggplot` (Grammar of graphics) Example
-
-```{r, results="hide"}
-rm(list=ls());library(data.table);library(ggplot2);
-## Generate some data:
-MyData <- data.table(group = factor(round(10 * runif(10*100))))
-MyData[ , YValue := rnorm(10*100) + sqrt(as.numeric(group))]
-## GGplot code:
-ggplot(MyData) + aes(x=group, y=YValue, color=group) + 
-	geom_boxplot()
-# ggplot(MyData) + aes(x=group, y=YValue, color=group) + 
-# 	geom_point()
-
-```
-
-================================================================================
-# Tsay Time Series book cover
-
-Topics: How to untangle code
-
-```{r}
-# Make two plots on the same canvas # Legend # Random walk  # Tsay book cover
-set.seed(123456)
-e <- rnorm(500)           ## White noise
-randwalk <- cumsum(e)     ## Random walk
-trend <- 1:500            ## Trend
-plot.ts(0.5 * trend + e, lty=1, ylab='', xlab='')  ## deterministic trend + noise
-lines(0.5 * trend + cumsum(e), lty=2)              ## random walk with drift
-lines(randwalk, lty=3, col='red')                  ## random walk (same scale)
-par(new=T)
-plot.ts(randwalk, lty=3, axes=FALSE, col='red')    ## random walk (own scale)
-axis(4, pretty(range(randwalk)))
-legend(10, 18.7, legend=c('deterministic trend + noise (left)',
-						  'random walk w/ drift (left)', 'random walk (left+right)'),
-	   lty=c(1, 2, 3), col=c('black', 'black', 'red')) 
-```
-
-================================================================================
-# Tsay Time Series book cover (plot from previous slide)
+![texteditor](images_lec2/different_ways_to_use_R.PNG)
 
 
-```{r, echo=FALSE}
-# Make two plots on the same canvas # Legend # Random walk  # Tsay book cover
-set.seed(123456)
-e <- rnorm(500)           ## White noise
-randwalk <- cumsum(e)     ## Random walk
-trend <- 1:500            ## Trend
-plot.ts(0.5 * trend + e, lty=1, ylab='', xlab='')  ## deterministic trend + noise
-lines(0.5 * trend + cumsum(e), lty=2)              ## random walk with drift
-lines(randwalk, lty=3, col='red')                  ## random walk (same scale)
-par(new=T)
-plot.ts(randwalk, lty=3, axes=FALSE, col='red')    ## random walk (own scale)
-axis(4, pretty(range(randwalk)))
-legend(10, 18.7, legend=c('deterministic trend + noise (left)',
-						  'random walk w/ drift (left)', 'random walk (left+right)'),
-	   lty=c(1, 2, 3), col=c('black', 'black', 'red')) 
-```
+
+
 
 ================================================================================
 # Source Control using git
@@ -275,11 +229,82 @@ People seem to think that github is git.  Github is a host (probably the best ho
 https://github.com/ <br>
 https://github.com/geneorama/  <<- me
 
+================================================================================
+## Github
+
+Github is by far the best way to use git, but you should still download git
+Download git: http://git-scm.com/
+
+Github supports: 
+ - Branch comparison
+ - Issues
+ - Workflow assignments
+ - Team managment
+ - Commenting
+ - Communication
+ - Markdown
+
+***
+
+![Stackoverflow](images_lec2/winmerge.PNG)
+
+================================================================================
 ## File comparison
 
 It's important to have a good way to compare and merge files.  My preferred solution is Winmerge, but you can find many other programs online
  - http://winmerge.org/
 
+![Stackoverflow](images_lec2/winmerge.PNG)
 
 
 
+
+
+
+
+================================================================================
+# Small Example
+
+Topics: Assignment, variables, functions, random number generation,
+        factors, comments, vectors
+
+```{r}
+## Boxplot Example with gl
+g <- factor(round(10 * runif(10*100)))
+x <- rnorm(10*100) + sqrt(as.numeric(g))
+boxplot(x ~ g, col = 'lavender', notch = T, var.width = T,
+		main = "something random")
+```
+
+
+================================================================================
+# `ggplot` (Grammar of graphics) Example
+
+```{r, results="hide"}
+## Load libraries:
+rm(list=ls())
+library(data.table)
+library(ggplot2)
+
+## Generate some data:
+n_groups <- 10
+n_obs <- 100
+MyData <- data.table(
+	group = factor(round(10 * runif(10*100))))
+
+MyData[i = TRUE, 
+	   j = YValue := rnorm(10*100) + sqrt(as.numeric(group))]
+
+# ggplot(MyData) + aes(x = group, 
+# 					   y = YValue, 
+# 					   color = group) + 
+# 	geom_point()
+```
+***
+```{r}
+## GGplot code:
+ggplot(MyData) + 
+	aes(x=group, y=YValue, color=group) + 
+	geom_boxplot()
+
+```
