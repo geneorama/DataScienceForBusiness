@@ -1,0 +1,79 @@
+================================================================================
+	# Tsay Time Series book cover
+	
+	Topics: How to untangle code
+
+```{r}
+# Make two plots on the same canvas # Legend # Random walk  # Tsay book cover
+set.seed(123456)
+e <- rnorm(500)           ## White noise
+randwalk <- cumsum(e)     ## Random walk
+trend <- 1:500            ## Trend
+plot.ts(0.5 * trend + e, lty=1, ylab='', xlab='')  ## deterministic trend + noise
+lines(0.5 * trend + cumsum(e), lty=2)              ## random walk with drift
+lines(randwalk, lty=3, col='red')                  ## random walk (same scale)
+par(new=T)
+plot.ts(randwalk, lty=3, axes=FALSE, col='red')    ## random walk (own scale)
+axis(4, pretty(range(randwalk)))
+legend(10, 18.7, legend=c('deterministic trend + noise (left)',
+						  'random walk w/ drift (left)', 'random walk (left+right)'),
+	   lty=c(1, 2, 3), col=c('black', 'black', 'red')) 
+```
+
+================================================================================
+# Tsay Time Series book cover (plot from previous slide)
+	
+	
+```{r, echo=FALSE}
+# Make two plots on the same canvas # Legend # Random walk  # Tsay book cover
+set.seed(123456)
+e <- rnorm(500)           ## White noise
+randwalk <- cumsum(e)     ## Random walk
+trend <- 1:500            ## Trend
+plot.ts(0.5 * trend + e, lty=1, ylab='', xlab='')  ## deterministic trend + noise
+lines(0.5 * trend + cumsum(e), lty=2)              ## random walk with drift
+lines(randwalk, lty=3, col='red')                  ## random walk (same scale)
+par(new=T)
+plot.ts(randwalk, lty=3, axes=FALSE, col='red')    ## random walk (own scale)
+axis(4, pretty(range(randwalk)))
+legend(10, 18.7, legend=c('deterministic trend + noise (left)',
+						  'random walk w/ drift (left)', 'random walk (left+right)'),
+	   lty=c(1, 2, 3), col=c('black', 'black', 'red')) 
+```
+
+
+Big picture of R
+================================================================================
+
+<br>
+**Things to install**
+ - R http://cran.r-project.org/
+ - RStudio  http://www.rstudio.com/products/rstudio/download/
+ - git http://git-scm.com/downloads
+
+**Things in R**
+ - Elements
+ - Vectors
+ - Matricies
+ - Data frames
+ - Lists
+ - Environments
+ - Functions
+
+-------------
+<br>
+**Things in R that do things (mostly within R)**
+ - Scripts
+ - Projects
+ - Packages on CRAN (install.packages)
+ - Packages elsewhere (devtools)
+
+**There are different ways to use R**
+ - Step through code
+ - Run a script at the command line
+ - Put things into functions (more like making software)
+
+**Technical details**
+ - You don't need admin rights to have a good time
+ - R was not written by pirates
+ - R was not written programmers either
