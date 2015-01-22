@@ -4,6 +4,9 @@
 # Example code in package build process
 *-Ex.R
 
+# knitr figure folders
+*-figure/
+
 # R data files from past sessions
 .Rdata
 
