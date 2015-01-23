@@ -116,12 +116,12 @@ setnames(coindat, "release", "number")
 
 ## This merge works:
 dat <- merge(x = coindat, 
-			 y = presdat[i = TRUE,
-			 			j = list(number,
-			 					 tookoffice, 
-			 					 leftoffice, 
-			 					 party = as.factor(party))], 
-			 by = "number")
+             y = presdat[i = TRUE,
+                         j = list(number,
+                                  tookoffice, 
+                                  leftoffice, 
+                                  party = as.factor(party))], 
+             by = "number")
 str(dat)
 ```
 
