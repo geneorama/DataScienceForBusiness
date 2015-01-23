@@ -73,6 +73,7 @@ Not the most reproducable way to do things.  Normally you should update live fro
 ```{r}
 rm(list=ls())
 ls()
+geneorama::set_project_dir("DataScienceForBusiness")
 
 coindat <- readRDS("data/Presidential_coins_wikipedia.Rds")
 presdat <- readRDS("data/Presidential_office_data.Rds")
@@ -90,9 +91,10 @@ coindat[,releasedate:=as.IDate(releasedate,  "%B %d, %Y")]
 
 ## Take a look at the coin data
 ```{r}
-str(dat)
+str(coindat)
 
-plot(total~releasedate, coindat[,list(total=total/1000, releasedate)], type="o", 
+plot(total~releasedate, 
+	 coindat[,list(total=total/1000, releasedate)], type="o", 
 	 main = paste("US President Mintage Output", "in 000's", sep="\n"))
 addbg()
 
