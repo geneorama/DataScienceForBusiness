@@ -1,0 +1,60 @@
+
+DATA SCIENCE FOR BUSINESS - Lecture 3
+================================================================================
+width: 1920
+height: 1080
+
+```{r echo=FALSE}
+
+# opts_chunk$set(fig.align='center', fig.width=18, fig.height=10)
+
+```
+Author: Gene Leynes
+
+Date: January 22, 2015
+
+Code examples only
+
+
+Objects can change classes
+================================================================================
+```{r}
+Something  <- 1:10
+class(Something)
+Something <- sqrt(Something)
+class(Something)
+```
+
+
+Objects can change classes
+================================================================================
+```{r}
+Something  <- 1:10
+class(Something)
+Something <- sqrt(Something)
+class(Something)
+```
+
+
+Objects can have names, which are ultimately attributes
+================================================================================
+```{r}
+Something  <- 1:10
+names(Something) <- letters[1:10]
+Something
+str(Something)  ## Remember: str is you bff!
+```
+
+
+
+Objects can have names, which are ultimately attributes
+================================================================================
+```{r}
+Something  <- 1:9
+attr(x = Something, which = "Version" ) <- "Version 3"
+attr(x = Something, which = "dim" ) <- c(3,3)
+Something
+```
+
+
+

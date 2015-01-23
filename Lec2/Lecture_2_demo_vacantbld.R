@@ -68,14 +68,8 @@ str(Partitions)
 rpartData <- as.data.table(cbind(xmat[Partitions[[1]], ],
 								 y = as.factor(ymat[Partitions[[1]], ])))
 ## xmat_filtered + y
-# rpartData <- as.data.table(cbind(xmat_filtered[Partitions[[1]], ],
-# 								 y = as.factor(ymat[Partitions[[1]], ])))
-## xmat_filtered_bx + y
-# rpartData <- as.data.table(cbind(xmat_filtered_bx[Partitions[[1]], ],
-# 								 y = as.factor(ymat[Partitions[[1]], ])))
-## xmat_filtered2 + y
-# rpartData <- as.data.table(cbind(xmat_filtered2[Partitions[[1]], ],
-# 								 y = as.factor(ymat[Partitions[[1]], ])))
+rpartData <- as.data.table(cbind(xmat_filtered[Partitions[[1]], ],
+								 y = as.factor(ymat[Partitions[[1]], ])))
 table(rpartData$y)
 
 rpartData
