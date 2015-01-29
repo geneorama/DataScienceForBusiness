@@ -4,26 +4,32 @@ stop()
 ## INITIALIZATION
 ##==============================================================================
 
-source('00 Initialize.R')
+source('26_and_California/00 Initialize.R')
+sourceDir('26_and_California/functions/')
 
 ##==============================================================================
 ## Read CSV
 ##==============================================================================
 
 rawdat = read.table(
-	file = 'Database 2013-01-21 (8zQ4cW7T).csv', sep=',', quote='"', 
-	flush=FALSE, header=TRUE, nrows=-1, fill=FALSE, stringsAsFactors=FALSE,
-	na.strings=c('None', ''))
+	file = '26_and_California/Database 2013-01-21 (8zQ4cW7T).csv', sep=',', 
+    quote='"', flush=FALSE, header=TRUE, nrows=-1, fill=FALSE, 
+    stringsAsFactors=FALSE, na.strings=c('None', ''))
 str(rawdat)
+head(rawdat)
+
+## Convert to data.table
 dat = as.data.table(rawdat)
 str(dat)
+dat
 
 ## Convert booking and discharge dates to date time objects
 ## EXAMPLE FORMAT: 2012-12-30T20:57:19.616186
-dat$booking_date = ExtractIsoTime(dat$booking_date)
-dat$discharge_date_earliest = ExtractIsoTime(dat$discharge_date_earliest)
+dat[ , booking_date := as.IDate(booking_date)]
+dat[ , discharge_date_earliest := as.IDate(discharge_date_earliest)]
 
 
+dat[ , .N, race]
 table(dat$race, useNA='ifany')
 
 ## I'm going to guess that W and WH are both "White"
