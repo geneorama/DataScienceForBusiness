@@ -48,6 +48,9 @@ corrplot(corr = cor(xmat),
 		 col = colorRampPalette(c("#7F0000", "red", "#FF7F00", "yellow", "#7FFF7F", 
 		 						 "cyan", "#007FFF", "blue", "#00007F"))(100))
 
+## Delete the plot to reset the graphics paramaters
+dev.off()
+
 findCorrelation(cor(xmat), cutoff=.75, verbose=F)
 findCorrelation(cor(xmat), cutoff=.95, verbose=F)
 
